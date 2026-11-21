@@ -49,7 +49,8 @@ The accumulator wraps modulo 2^16. Once overflow occurs, the `overflow` output r
 
 The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.
 
-To reproduce the functional test with Icarus Verilog from this folder:
+> [!TIP]
+> Run the following commands from the repository root to reproduce the functional test.
 
 ```sh
 iverilog -g2005 -s tb_flexmac8 -o simv flexmac8.v tb_flexmac8.v
