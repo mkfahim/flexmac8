@@ -91,7 +91,7 @@ FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) arc
 
 ---
 
-[![RTL](https://img.shields.io/badge/RTL-Verilog--2005-1f6feb)](./flexmac8.v)
+[![RTL](https://img.shields.io/badge/RTL-Verilog--2001-1f6feb)](./flexmac8.v)
 [![PDK](https://img.shields.io/badge/PDK-SKY130-f28c28)](https://github.com/google/skywater-pdk)
 [![Flow](https://img.shields.io/badge/Flow-LibreLane-8250df)](https://github.com/librelane/librelane)
 [![Clock](https://img.shields.io/badge/Clock-10_MHz-0969da)](#verification)
