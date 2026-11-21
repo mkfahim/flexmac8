@@ -62,7 +62,7 @@ The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` sta
 
 | Implementation parameter | Result |
 |---|---:|
-| Core footprint | 180 µm × 115 µm |
+| Silicluster given die area | 180 µm × 115 µm |
 | Placed standard-cell area | 6,426.16 µm² |
 | Clock target | 100 ns |
 | Timing violations | None |
