@@ -1,11 +1,13 @@
 # FlexMAC8 — Silicluster V3 Digital Project
 
-FlexMAC8 is a precision-adaptive, unsigned 8-bit multiply-accumulate (MAC) circuit with a 16-bit accumulator. The design uses synthesizable Verilog-2001 and is intended for the SKY130 digital implementation flow at a nominal 1.8 V supply.
+FlexMAC8 is a precision-adaptive, unsigned 8-bit multiply-accumulate (MAC) circuit with a 16-bit accumulator. The design uses synthesizable Verilog-2001 and is intended for the SKY130 digital implementation flow at a nominal 1.8 V supply (V<sub>DD</sub> = 1.8 V).
 
 ## Submitted files
 
-* `flexmac8.v` — synthesizable top-level RTL (`flexmac8`).
-* `tb_flexmac8.v` — self-checking Verilog testbench (`tb_flexmac8`).
+| File | Description |
+|:-----|:------------|
+| [`flexmac8.v`](./flexmac8.v) | Synthesizable top-level RTL (`flexmac8`). |
+| [`tb_flexmac8.v`](./tb_flexmac8.v) | Self-checking Verilog testbench (`tb_flexmac8`). |
 
 ## Digital interface
 
@@ -47,15 +49,52 @@ The accumulator wraps modulo 2^16. Once overflow occurs, the `overflow` output r
 
 ## Verification
 
-The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.
+The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.[^sim]
 
-To reproduce the functional test with Icarus Verilog from this folder:
+> [!TIP]
+> Run the following commands from the repository root to reproduce the functional test.
 
 ```sh
 iverilog -g2005 -s tb_flexmac8 -o simv flexmac8.v tb_flexmac8.v
 vvp simv
 ```
 
-The design also completed a SKY130 (`sky130_fd_sc_hd`) LibreLane implementation in a 180 µm × 115 µm footprint, with 6,426.16 µm² placed standard-cell area and no setup/hold timing violations at the 100 ns target. DRC, LVS, and antenna checks passed.
+Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to abort a running simulation.
 
-The Verilog source and testbench are the deliverables required for a Silicluster V3 digital submission. Physical design outputs are not included but can be provided on request.
+### SKY130 Implementation
+
+The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` standard-cell library.
+
+| Implementation parameter | Result |
+|---|---:|
+| Silicluster given die area | 180 µm × 115 µm |
+| Placed standard-cell area [^util] | 6,426.16 µm² |
+| Clock target | 100 ns |
+| Timing violations | None |
+| DRC | Passed |
+| LVS | Passed |
+| Antenna check | Passed |
+
+> The Verilog source and testbench are the deliverables required for a Silicluster V3 digital submission. Physical-design outputs are not included in this repository but can be provided separately.
+
+## Related work
+
+FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) architectures and bit-serial arithmetic. These works provide the architectural context for precision-programmable and bit-efficient MAC units.
+
+<details>
+<summary>Show references (2)</summary>
+  
+<a id="ref-1"></a>[1] H. Zhang, D. Chen, and S.-B. Ko, “New Flexible Multiple-Precision Multiply-Accumulate Unit for Deep Neural Network Training and Inference,” *IEEE Transactions on Computers*, vol. 69, no. 1, pp. 26–38, Jan. 2020. https://doi.org/10.1109/TC.2019.2936192
+
+<a id="ref-2"></a>[2] H. Chhajed, G. Raut, N. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, vol. 41, pp. 2045–2060, 2022. https://doi.org/10.1007/s00034-021-01873-9
+</details>
+
+---
+
+[![RTL](https://img.shields.io/badge/RTL-Verilog--2001-1f6feb)](./flexmac8.v)
+[![PDK](https://img.shields.io/badge/PDK-SKY130-f28c28)](https://github.com/google/skywater-pdk)
+[![Flow](https://img.shields.io/badge/Flow-LibreLane-8250df)](https://github.com/librelane/librelane)
+[![Clock](https://img.shields.io/badge/Clock-10_MHz-0969da)](#verification)
+
+[^util]: Derived value: 6,426.16 µm² ÷ (180 µm × 115 µm = 20,700 µm²) ≈ 0.31. The placed standard-cell area is about 31% of the given die area.
+[^sim]: The recorded run used Verilator. The commands in _Verification_ Section use Icarus Verilog, so results should match but are a separate run.
