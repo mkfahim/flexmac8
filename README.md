@@ -1,11 +1,13 @@
 # FlexMAC8 — Silicluster V3 Digital Project
 
-FlexMAC8 is a precision-adaptive, unsigned 8-bit multiply-accumulate (MAC) circuit with a 16-bit accumulator. The design uses synthesizable Verilog-2001 and is intended for the SKY130 digital implementation flow at a nominal 1.8 V supply.
+FlexMAC8 is a precision-adaptive, unsigned 8-bit multiply-accumulate (MAC) circuit with a 16-bit accumulator. The design uses synthesizable Verilog-2001 and is intended for the SKY130 digital implementation flow at a nominal 1.8 V supply (V<sub>DD</sub> = 1.8 V).
 
 ## Submitted files
 
-* `flexmac8.v` — synthesizable top-level RTL (`flexmac8`).
-* `tb_flexmac8.v` — self-checking Verilog testbench (`tb_flexmac8`).
+| File | Description |
+|:-----|:------------|
+| [`flexmac8.v`](./flexmac8.v) | Synthesizable top-level RTL (`flexmac8`). |
+| [`tb_flexmac8.v`](./tb_flexmac8.v) | Self-checking Verilog testbench (`tb_flexmac8`). |
 
 ## Digital interface
 
@@ -57,6 +59,8 @@ iverilog -g2005 -s tb_flexmac8 -o simv flexmac8.v tb_flexmac8.v
 vvp simv
 ```
 
+Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to abort a running simulation.
+
 ### SKY130 Implementation
 
 The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` standard-cell library.
@@ -75,11 +79,13 @@ The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` sta
 
 ## Related work
 
-FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) architectures and bit-serial arithmetic:
+FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) architectures and bit-serial arithmetic. These works provide the architectural context for precision-programmable and bit-efficient MAC units.
 
-1. V. Camus, C. Enz, and M. Verhelst, “Survey of Precision-Scalable Multiply-Accumulate Units for Neural-Network Processing,” *IEEE AICAS*, 2019. https://doi.org/10.1109/AICAS.2019.8771610
-2. H. Zhang, D. Chen, and S.-B. Ko, “New Flexible Multiple-Precision Multiply-Accumulate Unit for Deep Neural Network Training and Inference,” *IEEE Transactions on Circuits and Systems I: Regular Papers*, 2019. https://ieeexplore.ieee.org/document/8825551
-3. W. Li, A. Hu, G. Wang, N. Xu, and G. He, “Low-Complexity Precision-Scalable Multiply-Accumulate Unit Architectures for Deep Neural Network Accelerators,” *IEEE Transactions on Circuits and Systems II: Express Briefs*, 2023. https://ieeexplore.ieee.org/document/9997127
-4. H. Chhajed, G. Raut, N. S. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, 2022. https://link.springer.com/article/10.1007/s00034-021-01873-9
+<details>
+<summary>Show references (2)</summary>
+  
+<a id="ref-1"></a>[1] H. Zhang, D. Chen, and S.-B. Ko, “New Flexible Multiple-Precision Multiply-Accumulate Unit for Deep Neural Network Training and Inference,” *IEEE Transactions on Computers*, vol. 69, no. 1, pp. 26–38, Jan. 2020. https://doi.org/10.1109/TC.2019.2936192
 
-These works provide the architectural context for precision-programmable and bit-efficient MAC units.
+<a id="ref-2"></a>[2] H. Chhajed, G. Raut, N. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, vol. 41, pp. 2045–2060, 2022. https://doi.org/10.1007/s00034-021-01873-9
+</details>
+
