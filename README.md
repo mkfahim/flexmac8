@@ -49,7 +49,7 @@ The accumulator wraps modulo 2^16. Once overflow occurs, the `overflow` output r
 
 ## Verification
 
-The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.
+The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.[^sim]
 
 > [!TIP]
 > Run the following commands from the repository root to reproduce the functional test.
@@ -68,7 +68,7 @@ The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` sta
 | Implementation parameter | Result |
 |---|---:|
 | Silicluster given die area | 180 µm × 115 µm |
-| Placed standard-cell area | 6,426.16 µm² |
+| Placed standard-cell area [^util] | 6,426.16 µm² |
 | Clock target | 100 ns |
 | Timing violations | None |
 | DRC | Passed |
@@ -89,3 +89,12 @@ FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) arc
 <a id="ref-2"></a>[2] H. Chhajed, G. Raut, N. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, vol. 41, pp. 2045–2060, 2022. https://doi.org/10.1007/s00034-021-01873-9
 </details>
 
+---
+
+[![RTL](https://img.shields.io/badge/RTL-Verilog--2005-1f6feb)](./flexmac8.v)
+[![PDK](https://img.shields.io/badge/PDK-SKY130-f28c28)](https://github.com/google/skywater-pdk)
+[![Flow](https://img.shields.io/badge/Flow-LibreLane-8250df)](https://github.com/librelane/librelane)
+[![Clock](https://img.shields.io/badge/Clock-10_MHz-0969da)](#verification)
+
+[^util]: Derived value: 6,426.16 µm² ÷ (180 µm × 115 µm = 20,700 µm²) ≈ 0.31. The placed standard-cell area is about 31% of the given die area.
+[^sim]: The recorded run used Verilator. The commands in _Verification_ Section use Icarus Verilog, so results should match but are a separate run.
