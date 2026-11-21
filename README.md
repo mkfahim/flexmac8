@@ -56,9 +56,21 @@ iverilog -g2005 -s tb_flexmac8 -o simv flexmac8.v tb_flexmac8.v
 vvp simv
 ```
 
-The design also completed a SKY130 (`sky130_fd_sc_hd`) LibreLane implementation in a 180 µm × 115 µm footprint, with 6,426.16 µm² placed standard-cell area and no setup/hold timing violations at the 100 ns target. DRC, LVS, and antenna checks passed.
+### SKY130 Implementation
 
-The Verilog source and testbench are the deliverables required for a Silicluster V3 digital submission. Physical design outputs are not included but can be provided on request.
+The design was implemented using LibreLane with the SKY130 `sky130_fd_sc_hd` standard-cell library.
+
+| Implementation parameter | Result |
+|---|---:|
+| Core footprint | 180 µm × 115 µm |
+| Placed standard-cell area | 6,426.16 µm² |
+| Clock target | 100 ns |
+| Timing violations | None |
+| DRC | Passed |
+| LVS | Passed |
+| Antenna check | Passed |
+
+> The Verilog source and testbench are the deliverables required for a Silicluster V3 digital submission. Physical-design outputs are not included in this repository but can be provided separately.
 
 ## Related work
 
@@ -69,4 +81,4 @@ FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) arc
 3. W. Li, A. Hu, G. Wang, N. Xu, and G. He, “Low-Complexity Precision-Scalable Multiply-Accumulate Unit Architectures for Deep Neural Network Accelerators,” *IEEE Transactions on Circuits and Systems II: Express Briefs*, 2023. https://ieeexplore.ieee.org/document/9997127
 4. H. Chhajed, G. Raut, N. S. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, 2022. https://link.springer.com/article/10.1007/s00034-021-01873-9
 
-These works provide the architectural context for precision-programmable and bit-efficient MAC units. FlexMAC8 is a smaller, command-controlled unsigned RTL design: it selects among exact or deterministically truncated B operands and performs multiplication with a serial shift-and-add datapath rather than a combinational or bit-brick PSMAC architecture.
+These works provide the architectural context for precision-programmable and bit-efficient MAC units.
