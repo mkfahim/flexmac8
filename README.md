@@ -45,17 +45,6 @@ For `cmd=10`, `precision` selects:
 
 The accumulator wraps modulo 2^16. Once overflow occurs, the `overflow` output remains asserted until a CLEAR command or reset. New `start` requests are ignored while `busy` is high. LOAD and CLEAR commands complete at the accepting clock edge; MAC completion is indicated after the selected processing cycles.
 
-## Related work
-
-FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) architectures and bit-serial arithmetic:
-
-1. V. Camus, C. Enz, and M. Verhelst, “Survey of Precision-Scalable Multiply-Accumulate Units for Neural-Network Processing,” *IEEE AICAS*, 2019. https://doi.org/10.1109/AICAS.2019.8771610
-2. H. Zhang, D. Chen, and S.-B. Ko, “New Flexible Multiple-Precision Multiply-Accumulate Unit for Deep Neural Network Training and Inference,” *IEEE Transactions on Circuits and Systems I: Regular Papers*, 2019. https://ieeexplore.ieee.org/document/8825551
-3. W. Li, A. Hu, G. Wang, N. Xu, and G. He, “Low-Complexity Precision-Scalable Multiply-Accumulate Unit Architectures for Deep Neural Network Accelerators,” *IEEE Transactions on Circuits and Systems II: Express Briefs*, 2023. https://ieeexplore.ieee.org/document/9997127
-4. H. Chhajed, G. Raut, N. S. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, 2022. https://link.springer.com/article/10.1007/s00034-021-01873-9
-
-These works provide the architectural context for precision-programmable and bit-efficient MAC units. FlexMAC8 is a smaller, command-controlled unsigned RTL design: it selects among exact or deterministically truncated B operands and performs multiplication with a serial shift-and-add datapath rather than a combinational or bit-brick PSMAC architecture.
-
 ## Verification
 
 The provided self-checking testbench uses a **100 ns clock period (10 MHz)** and checks exact/precision-reduced arithmetic, accumulation, byte readback, overflow, and reset behavior. A recorded Verilator run completed **467 arithmetic/readback checks with no mismatches**.
@@ -70,3 +59,14 @@ vvp simv
 The design also completed a SKY130 (`sky130_fd_sc_hd`) LibreLane implementation in a 180 µm × 115 µm footprint, with 6,426.16 µm² placed standard-cell area and no setup/hold timing violations at the 100 ns target. DRC, LVS, and antenna checks passed.
 
 The Verilog source and testbench are the deliverables required for a Silicluster V3 digital submission. Physical design outputs are not included but can be provided on request.
+
+## Related work
+
+FlexMAC8 relates to research on precision-scalable multiply-accumulate (MAC) architectures and bit-serial arithmetic:
+
+1. V. Camus, C. Enz, and M. Verhelst, “Survey of Precision-Scalable Multiply-Accumulate Units for Neural-Network Processing,” *IEEE AICAS*, 2019. https://doi.org/10.1109/AICAS.2019.8771610
+2. H. Zhang, D. Chen, and S.-B. Ko, “New Flexible Multiple-Precision Multiply-Accumulate Unit for Deep Neural Network Training and Inference,” *IEEE Transactions on Circuits and Systems I: Regular Papers*, 2019. https://ieeexplore.ieee.org/document/8825551
+3. W. Li, A. Hu, G. Wang, N. Xu, and G. He, “Low-Complexity Precision-Scalable Multiply-Accumulate Unit Architectures for Deep Neural Network Accelerators,” *IEEE Transactions on Circuits and Systems II: Express Briefs*, 2023. https://ieeexplore.ieee.org/document/9997127
+4. H. Chhajed, G. Raut, N. S. Dhakad, S. Vishwakarma, and S. K. Vishvakarma, “BitMAC: Bit-Serial Computation-Based Efficient Multiply-Accumulate Unit for DNN Accelerator,” *Circuits, Systems, and Signal Processing*, 2022. https://link.springer.com/article/10.1007/s00034-021-01873-9
+
+These works provide the architectural context for precision-programmable and bit-efficient MAC units. FlexMAC8 is a smaller, command-controlled unsigned RTL design: it selects among exact or deterministically truncated B operands and performs multiplication with a serial shift-and-add datapath rather than a combinational or bit-brick PSMAC architecture.
